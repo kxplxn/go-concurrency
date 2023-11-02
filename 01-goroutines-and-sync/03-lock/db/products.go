@@ -6,8 +6,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/utils"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/utils"
 )
 
 type ProductDB struct {

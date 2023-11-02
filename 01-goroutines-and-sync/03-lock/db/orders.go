@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
 )
 
 type OrderDB struct{ placedOrders sync.Map }

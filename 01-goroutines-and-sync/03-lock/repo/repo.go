@@ -5,8 +5,8 @@ import (
 	"math"
 	"sync"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/db"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/db"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
 )
 
 // repo holds all the dependencies required for repo operations

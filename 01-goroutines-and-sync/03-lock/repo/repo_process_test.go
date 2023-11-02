@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	db2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/db"
-	models2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
+	db2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/db"
+	models2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
 )
 
 const productCode = "TEST"
