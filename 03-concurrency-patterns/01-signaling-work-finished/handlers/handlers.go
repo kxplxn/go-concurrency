@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sync"
 
 	"github.com/gorilla/mux"
 
@@ -13,6 +14,7 @@ import (
 
 type handler struct {
 	repo repo.Repo
+	once sync.Once
 }
 
 type Handler interface {
@@ -80,6 +82,7 @@ func (h *handler) OrderInsert(w http.ResponseWriter, r *http.Request) {
 
 // Close closes the orders app for new orders
 func (h *handler) Close(w http.ResponseWriter, r *http.Request) {
-	h.repo.Close()
-	writeResponse(w, http.StatusOK, "The Orders App is now closed!", nil)
+	h.once.Do(func() {
+		h.repo.Close()
+	})
 }
