@@ -7,8 +7,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/repo"
+	"github.com/kxplxn/go-concurrency/02-channels/04-using-channels/models"
+	"github.com/kxplxn/go-concurrency/02-channels/04-using-channels/repo"
 )
 
 type handler struct {

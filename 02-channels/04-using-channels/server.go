@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/handlers"
+	"github.com/kxplxn/go-concurrency/02-channels/04-using-channels/handlers"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/db"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-lock/models"
+	"github.com/kxplxn/go-concurrency/02-channels/04-using-channels/db"
+	"github.com/kxplxn/go-concurrency/02-channels/04-using-channels/models"
 )
 
 // repo holds all the dependencies required for repo operations
