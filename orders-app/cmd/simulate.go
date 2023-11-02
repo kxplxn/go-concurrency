@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
+	"github.com/kxplxn/go-concurrency/orders-app/models"
 )
 
 const simulationCount int = 50

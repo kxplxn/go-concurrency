@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
+	"github.com/kxplxn/go-concurrency/orders-app/models"
 )
 
 type OrderDB struct {

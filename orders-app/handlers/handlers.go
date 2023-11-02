@@ -7,8 +7,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/repo"
+	"github.com/kxplxn/go-concurrency/orders-app/models"
+	"github.com/kxplxn/go-concurrency/orders-app/repo"
 )
 
 type handler struct {

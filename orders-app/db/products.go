@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
-	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/utils"
+	"github.com/kxplxn/go-concurrency/orders-app/models"
+	"github.com/kxplxn/go-concurrency/orders-app/utils"
 )
 
 type ProductDB struct {
