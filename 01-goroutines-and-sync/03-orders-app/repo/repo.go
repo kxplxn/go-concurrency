@@ -5,60 +5,60 @@ import (
 	"math"
 	"sync"
 
-	db2 "github.com/kxplxn/go-concurrency/orders-app/db"
-	models2 "github.com/kxplxn/go-concurrency/orders-app/models"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/db"
+	"github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
 )
 
 // repo holds all the dependencies required for repo operations
 type repo struct {
-	products *db2.ProductDB
-	orders   *db2.OrderDB
+	products *db.ProductDB
+	orders   *db.OrderDB
 	lock     sync.Mutex
 }
 
 // Repo is the interface we expose to outside packages
 type Repo interface {
-	CreateOrder(item models2.Item) (*models2.Order, error)
-	GetAllProducts() []models2.Product
-	GetOrder(id string) (models2.Order, error)
+	CreateOrder(item models.Item) (*models.Order, error)
+	GetAllProducts() []models.Product
+	GetOrder(id string) (models.Order, error)
 }
 
 // New creates a new Order repo with the correct database dependencies
 func New() (Repo, error) {
-	p, err := db2.NewProducts()
+	p, err := db.NewProducts()
 	if err != nil {
 		return nil, err
 	}
 	o := repo{
 		products: p,
-		orders:   db2.NewOrders(),
+		orders:   db.NewOrders(),
 	}
 	return &o, nil
 }
 
 // GetAllProducts returns all products in the system
-func (r *repo) GetAllProducts() []models2.Product {
+func (r *repo) GetAllProducts() []models.Product {
 	return r.products.FindAll()
 }
 
 // GetProduct returns the given order if one exists
-func (r *repo) GetOrder(id string) (models2.Order, error) {
+func (r *repo) GetOrder(id string) (models.Order, error) {
 	return r.orders.Find(id)
 }
 
 // CreateOrder creates a new order for the given item
-func (r *repo) CreateOrder(item models2.Item) (*models2.Order, error) {
+func (r *repo) CreateOrder(item models.Item) (*models.Order, error) {
 	if err := r.validateItem(item); err != nil {
 		return nil, err
 	}
-	order := models2.NewOrder(item)
+	order := models.NewOrder(item)
 	r.orders.Upsert(order)
 	r.processOrders(&order)
 	return &order, nil
 }
 
 // validateItem runs validations on a given order
-func (r *repo) validateItem(item models2.Item) error {
+func (r *repo) validateItem(item models.Item) error {
 	if item.Amount < 1 {
 		return fmt.Errorf("order amount must be at least 1:got %d", item.Amount)
 	}
@@ -68,7 +68,7 @@ func (r *repo) validateItem(item models2.Item) error {
 	return nil
 }
 
-func (r *repo) processOrders(order *models2.Order) {
+func (r *repo) processOrders(order *models.Order) {
 	r.lock.Lock()
 	r.lock.Unlock()
 	r.processOrder(order)
@@ -77,16 +77,16 @@ func (r *repo) processOrders(order *models2.Order) {
 }
 
 // processOrder is an internal method which completes or rejects an order
-func (r *repo) processOrder(order *models2.Order) {
+func (r *repo) processOrder(order *models.Order) {
 	item := order.Item
 	product, err := r.products.Find(item.ProductID)
 	if err != nil {
-		order.Status = models2.OrderStatus_Rejected
+		order.Status = models.OrderStatus_Rejected
 		order.Error = err.Error()
 		return
 	}
 	if product.Stock < item.Amount {
-		order.Status = models2.OrderStatus_Rejected
+		order.Status = models.OrderStatus_Rejected
 		order.Error = fmt.Sprintf("not enough stock for product %s:got %d, want %d", item.ProductID, product.Stock, item.Amount)
 		return
 	}

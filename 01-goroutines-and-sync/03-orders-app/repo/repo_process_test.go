@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/kxplxn/go-concurrency/orders-app/db"
-	"github.com/kxplxn/go-concurrency/orders-app/models"
+	db2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/db"
+	models2 "github.com/kxplxn/go-concurrency/01-goroutines-and-sync/03-orders-app/models"
 )
 
 const productCode = "TEST"
@@ -22,16 +22,16 @@ func Test_ProcessOrder(t *testing.T) {
 	// Uncomment out line below to skip it
 	// t.Skip("Skipping process Order test")
 
-	prod := &db.ProductDB{}
-	prod.Upsert(models.Product{
+	prod := &db2.ProductDB{}
+	prod.Upsert(models2.Product{
 		ID:    productCode,
 		Stock: productStock,
 	})
 	r := &repo{
-		orders:   db.NewOrders(),
+		orders:   db2.NewOrders(),
 		products: prod,
 	}
-	item := models.Item{
+	item := models2.Item{
 		ProductID: productCode,
 		Amount:    1,
 	}
@@ -42,7 +42,7 @@ func Test_ProcessOrder(t *testing.T) {
 		for j := 0; j < concurrentOrders; j++ {
 			go func(wg *sync.WaitGroup) {
 				defer wg.Done()
-				order := models.NewOrder(item)
+				order := models2.NewOrder(item)
 				r.processOrders(&order)
 			}(&wg)
 		}
