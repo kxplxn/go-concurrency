@@ -31,7 +31,7 @@ type Repo interface {
 
 // New creates a new Order repo with the correct database dependencies
 func New() (Repo, error) {
-	processed := make(chan models.Order)
+	processed := make(chan models.Order, stats.WorkerCount)
 	done := make(chan struct{})
 	p, err := db.NewProducts()
 	if err != nil {
@@ -49,7 +49,6 @@ func New() (Repo, error) {
 
 	// start the order processor
 	go o.processOrders()
-
 	return &o, nil
 }
 
